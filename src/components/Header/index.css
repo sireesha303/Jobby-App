@@ -1,15 +1,17 @@
 .header-container{
-    background-color: rgb(34, 27, 27);
+    background-color: rgb(31, 30, 30);
     padding: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    margin:0px;
 }
 
 .header-logo-img{
     height:40px;
     width:60px;
+    margin-left: 40px;
 }
 
 .nav-link{
@@ -18,4 +20,17 @@
     color:white;
     font-family: 'roboto';
     margin:10px;
+}
+
+.logout-btn{
+    margin-right: 40px;
+    color:white;
+    background-color: blue;
+    padding-right:10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 2px;
+    border:1px solid white;
+
 }

@@ -17,7 +17,7 @@ const Header = () => {
                 <Link to="/jobs" className='nav-link'>Jobs</Link>
             </div>
             
-            <button>Logout</button>
+            <button className='logout-btn'>Logout</button>
             
         </div>
     )
