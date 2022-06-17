@@ -1,0 +1,21 @@
+.header-container{
+    background-color: rgb(34, 27, 27);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.header-logo-img{
+    height:40px;
+    width:60px;
+}
+
+.nav-link{
+    font-size:15px;
+    text-decoration: none;
+    color:white;
+    font-family: 'roboto';
+    margin:10px;
+}
