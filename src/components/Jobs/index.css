@@ -1,0 +1,32 @@
+.jobs-bg-container{
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+    background-color: black;
+}
+
+.profile-container{
+    background-image: url("https://assets.ccbp.in/frontend/react-js/profile-bg.png");
+    border-radius: 8px;
+}
+
+.profile-filters-container{
+    width:220px;
+    margin-right:50px;
+}
+
+.filter-heading{
+    color: white;
+    font-size: "Roboto";
+    font-size: 15px;
+}
+.line-break{
+    height: 0.5px;
+    background-color: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.filter-label{
+    color: white;
+}

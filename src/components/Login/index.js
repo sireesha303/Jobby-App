@@ -1,14 +1,42 @@
 import {useState} from 'react'
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 import './index.css'
 
 const Login = () =>{
     const [username,setUsername] = useState()
     const [password,setPassword] = useState()
+    const [loginError,setLoginError] = useState({showLoginError:false,loginErrorMsg:""});
 
-    const onFormSubmit = event => {
+    const navigate = useNavigate();
+
+    const onLoginSuccess = (jwtToken) =>{
+        Cookies.set('jobby_app_jwt_token',jwtToken,{expires:2})
+        navigate("/");
+    }
+
+    const onLoginFailure = (errorMsg) =>{
+        setLoginError({showLoginError:true,loginErrorMsg:errorMsg})
+    }
+
+    const onFormSubmit = async event => {
         event.preventDefault();
         // console.log("testing form submit")
+        const url = "https://apis.ccbp.in/login"
+        const options ={method: 'POST',
+        body: JSON.stringify({ username:username,password:password})
+        };
+
+        const response = await fetch(url,options)
+        const data = await response.json();
+
+        if(response.ok === true){
+            onLoginSuccess(data.jwt_token)
+        }
+        else{
+            onLoginFailure(data.error_msg)
+        }
     }
 
     const onChangeOfUsername = event => {
@@ -49,7 +77,8 @@ const Login = () =>{
                     {renderUsernameField()}
                     {renderPasswordField()}
                 </div>
-                <button type="submit" className='login-btn'>Login</button>       
+                <button type="submit" className='login-btn'>Login</button>  
+                {loginError.showLoginError && <p className='login-error-msg'>*{loginError.loginErrorMsg}</p>}     
             </form>
         </div>
        
