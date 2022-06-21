@@ -3,6 +3,7 @@
     flex-direction: row;
     padding: 50px;
     background-color: black;
+    overflow: auto;
 }
 
 .profile-container{
@@ -29,4 +30,28 @@
 
 .filter-label{
     color: white;
+}
+
+.search-container{
+    display: flex;
+    flex-direction: row;
+    border:1px solid white;
+    margin-left: 40px;
+    width:50%;
+    
+}
+
+.search-el{
+    background-color: transparent;
+    border:0px;
+    width:90%;
+    margin:5px;
+}
+
+.search-icon-container{
+    background-color: rgb(31, 30, 30);
+    width:10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

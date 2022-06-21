@@ -1,7 +1,10 @@
 import "./index.css"
 import Header from '../Header'
+import JobDetailsItem from '../JobDetailsItem'
+
 import { useEffect, useState } from "react"
 import Cookies from 'js-cookie';
+import {AiOutlineSearch} from 'react-icons/ai'
 
 const Jobs = () =>{
     const [jobslist, setJobsList] = useState([]);
@@ -19,12 +22,23 @@ const Jobs = () =>{
             }
 
             const response = await fetch(url,options);
-            const data = await response.json()
-            console.log(data)
+            // console.log(response)
+            const data = await response.json();
+             console.log(data)
+            const updatedListData = data.jobs.map(eachJob =>({
+                companyLogoUrl:eachJob.company_logo_url,
+                employmentType:eachJob.employment_type,
+                id:eachJob.id,
+                jobDescription:eachJob.job_description,
+                location:eachJob.location,
+                packagePerAnnum:eachJob.package_per_annum,
+                rating:eachJob.rating,
+                title:eachJob.title
+            }));
+            setJobsList(updatedListData)
         }
         fetchData();
-    }
-        ,[]);
+    },[]);
 
 
     return(
@@ -33,7 +47,7 @@ const Jobs = () =>{
             <div className="jobs-bg-container" id="jobs-bg-container">
             <div className="profile-filters-container">
                 <div className="profile-container">
-                    <img src=""/>
+                    {/* <img src=""/> */}
                     <h1>"Rahul Attuluri"</h1>
                     <p>"Short bio"</p>
                 </div>
@@ -59,8 +73,16 @@ const Jobs = () =>{
                 <label htmlFor="40lpa" className="filter-label">40LPA and above</label><br/>
             </div>
             <div>
-                <input type="search" />
-
+                <div className="search-container">
+                    <input type="search" className="search-el" placeholder="Search" />
+                    <div className="search-icon-container">
+                        <AiOutlineSearch fill="white"/>
+                    </div>
+                </div>
+                
+                <ul>
+                    {jobslist.map((eachJob)=><JobDetailsItem jobDetails={eachJob} />)}
+                </ul>
             </div>
 
         </div>
