@@ -7,7 +7,7 @@ import {AiFillStar} from "react-icons/ai";
 const JobDetailsItem = props =>{
     //  console.log(props)
     const {jobDetails} = props;
-    const {companyLogoUrl, employmentType, id, jobDescription, location, packagePerAnnum, rating, title} = jobDetails;
+    const {companyLogoUrl, employmentType, jobDescription, location, packagePerAnnum, rating, title} = jobDetails;
     return(
         <li className='job-detail-item-container'>
             <div className='logo-company-name-container'>
