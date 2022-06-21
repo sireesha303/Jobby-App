@@ -9,11 +9,15 @@
 .profile-container{
     background-image: url("https://assets.ccbp.in/frontend/react-js/profile-bg.png");
     border-radius: 8px;
+    padding: 10px;
+    overflow: auto;
+    width:200px;
 }
 
 .profile-filters-container{
-    width:220px;
+    width:300px;
     margin-right:50px;
+    
 }
 
 .filter-heading{
@@ -54,4 +58,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.profile-img{
+    height:50px;
+    width:50px;
+}
+
+.name-el{
+    font-family: 'roboto';
+    font-size: 25px;
+}
+
+.short-bio{
+    font-family: 'roboto';
+    font-size: 15px;
 }

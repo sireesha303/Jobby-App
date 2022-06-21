@@ -8,6 +8,7 @@ import {AiOutlineSearch} from 'react-icons/ai'
 
 const Jobs = () =>{
     const [jobslist, setJobsList] = useState([]);
+    const [userInfo,setUserInfo] = useState({profileImgUrl:"",name:"",shortBio:""});
 
 
     useEffect(()=>{
@@ -24,7 +25,7 @@ const Jobs = () =>{
             const response = await fetch(url,options);
             // console.log(response)
             const data = await response.json();
-             console.log(data)
+            //  console.log(data)
             const updatedListData = data.jobs.map(eachJob =>({
                 companyLogoUrl:eachJob.company_logo_url,
                 employmentType:eachJob.employment_type,
@@ -36,6 +37,25 @@ const Jobs = () =>{
                 title:eachJob.title
             }));
             setJobsList(updatedListData)
+
+            const profileUrl = "https://apis.ccbp.in/profile"
+            const profileRequestOptions = {
+                method:"GET",
+                headers:{
+                    Authorization:`Bearer ${jwtToken}`
+                }
+            }
+
+            const profileInfoResponse = await fetch(profileUrl,profileRequestOptions)
+            const profileData = await profileInfoResponse.json();
+            console.log(profileData.profile_details)
+
+            
+            setUserInfo({
+                profileImgUrl:profileData.profile_details.profile_image_url,
+                name:profileData.profile_details.name,
+                shortBio:profileData.profile_details.short_bio
+            })
         }
         fetchData();
     },[]);
@@ -47,9 +67,9 @@ const Jobs = () =>{
             <div className="jobs-bg-container" id="jobs-bg-container">
             <div className="profile-filters-container">
                 <div className="profile-container">
-                    {/* <img src=""/> */}
-                    <h1>"Rahul Attuluri"</h1>
-                    <p>"Short bio"</p>
+                    <img src={`${userInfo.profileImgUrl}`} alt="Profile-Img-Url" className="profile-img"/>
+                    <h1 className="name-el">{userInfo.name}</h1>
+                    <p className="short-bio">{userInfo.shortBio}</p>
                 </div>
                 <hr className="line-break"/>
                 <h1 className="filter-heading">Type Of Employement</h1>
