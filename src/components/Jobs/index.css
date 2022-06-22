@@ -6,18 +6,41 @@
     overflow: auto;
 }
 
+@media screen and (max-width:767px) {
+    .jobs-bg-container{
+        flex-direction: column;
+        padding: 40px;
+        align-items: center;
+    }
+}
+
 .profile-container{
     background-image: url("https://assets.ccbp.in/frontend/react-js/profile-bg.png");
     border-radius: 8px;
     padding: 10px;
-    overflow: auto;
+    /* overflow: auto; */
     width:200px;
+}
+
+@media screen and (max-width:767px) {
+    .profile-container{
+        width:200px;
+        margin: 10px;
+}
 }
 
 .profile-filters-container{
     width:300px;
-    margin-right:50px;
+    margin-right:50px;  
+}
+
+@media screen and (max-width:767px) {
+.profile-filters-container{
+    width:100%;
+    margin:10px;  
     
+    }
+
 }
 
 .filter-heading{
@@ -45,11 +68,45 @@
     
 }
 
-.search-el{
+@media screen and (max-width:768px) {
+    .search-container{
+        display: none;
+  
+    }
+    
+}
+
+.search-container-for-sm{
+    display: flex;
+    flex-direction: row;
+    border:1px solid white;
+    /* margin: 4px; */
+    width:50%;
     background-color: transparent;
+}
+
+@media screen and (min-width:768px) {
+    .search-container-for-sm{
+        display: none;
+    }
+}
+
+.search-el{
+    background-color: black;
     border:0px;
     width:90%;
     margin:5px;
+
+}
+
+@media screen and (max-width:768px) {
+    .search-el{
+        background-color: black;
+        border:0px;
+        width:90%;
+        margin:0px;
+    
+    }
 }
 
 .search-icon-container{

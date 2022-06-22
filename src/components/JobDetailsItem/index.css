@@ -8,6 +8,12 @@
 
 }
 
+@media screen and (max-width:767px) {
+    .job-detail-item-container{
+        width:85vw;
+    }
+}
+
 .logo-company-name-container{
     display: flex;
     flex-direction: row;
