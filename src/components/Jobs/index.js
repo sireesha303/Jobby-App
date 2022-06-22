@@ -1,15 +1,25 @@
-import "./index.css"
-import Header from '../Header'
-import JobDetailsItem from '../JobDetailsItem'
-
 import { useEffect, useState } from "react"
 import Cookies from 'js-cookie';
 import {AiOutlineSearch} from 'react-icons/ai'
 
+import {ThreeDots} from 'react-loader-spinner'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+
+
+import "./index.css"
+import Header from '../Header'
+import JobItem from '../JobItem'
+
+const jobDetailsLodingStatus = {
+    success:"SUCCESS",
+    loading:"LOADING",
+    failure:"FAILURE"
+}
+
 const Jobs = () =>{
     const [jobslist, setJobsList] = useState([]);
-    const [userInfo,setUserInfo] = useState({profileImgUrl:"",name:"",shortBio:""});
-
+    const [userInfo,setUserInfo] = useState({profileImgUrl:"",name:"",shortBio:"",isProfileDetailsLoaded:false});
+    const [isJobDetailsLoaded,setJobDetailsLoadStatus] = useState(jobDetailsLodingStatus.loading)
 
     useEffect(()=>{
         async function fetchData(){
@@ -23,20 +33,26 @@ const Jobs = () =>{
             }
 
             const response = await fetch(url,options);
-            // console.log(response)
+            console.log(response)
             const data = await response.json();
-            //  console.log(data)
-            const updatedListData = data.jobs.map(eachJob =>({
-                companyLogoUrl:eachJob.company_logo_url,
-                employmentType:eachJob.employment_type,
-                id:eachJob.id,
-                jobDescription:eachJob.job_description,
-                location:eachJob.location,
-                packagePerAnnum:eachJob.package_per_annum,
-                rating:eachJob.rating,
-                title:eachJob.title
-            }));
-            setJobsList(updatedListData)
+            console.log(data)
+            if(response.ok === true){
+                const updatedListData = data.jobs.map(eachJob =>({
+                    companyLogoUrl:eachJob.company_logo_url,
+                    employmentType:eachJob.employment_type,
+                    id:eachJob.id,
+                    jobDescription:eachJob.job_description,
+                    location:eachJob.location,
+                    packagePerAnnum:eachJob.package_per_annum,
+                    rating:eachJob.rating,
+                    title:eachJob.title
+                }));
+                setJobsList(updatedListData);
+                setJobDetailsLoadStatus(jobDetailsLodingStatus.success);
+            }
+            else{
+                setJobDetailsLoadStatus(jobDetailsLodingStatus.failure);
+            }
 
             const profileUrl = "https://apis.ccbp.in/profile"
             const profileRequestOptions = {
@@ -48,13 +64,14 @@ const Jobs = () =>{
 
             const profileInfoResponse = await fetch(profileUrl,profileRequestOptions)
             const profileData = await profileInfoResponse.json();
-            console.log(profileData.profile_details)
+            // console.log(profileData.profile_details)
 
             
             setUserInfo({
                 profileImgUrl:profileData.profile_details.profile_image_url,
                 name:profileData.profile_details.name,
-                shortBio:profileData.profile_details.short_bio
+                shortBio:profileData.profile_details.short_bio,
+                isProfileDetailsLoaded:true
             })
         }
         fetchData();
@@ -72,11 +89,14 @@ const Jobs = () =>{
                         </div>
                 </div>
                 <div className="profile-filters-container">
-                    <div className="profile-container">
+                    {!userInfo.isProfileDetailsLoaded ? <ThreeDots type="TailSpin" color="white" height={100} width={50} />:
+                        <div className="profile-container">
                         <img src={`${userInfo.profileImgUrl}`} alt="Profile-Img-Url" className="profile-img"/>
                         <h1 className="name-el">{userInfo.name}</h1>
                         <p className="short-bio">{userInfo.shortBio}</p>
                     </div>
+                    }
+                    
                     <hr className="line-break"/>
                     <h1 className="filter-heading">Type Of Employement</h1>
                     <input type="checkbox" id="fulltime" name="fav_language" value="Full Time"/>
@@ -105,9 +125,35 @@ const Jobs = () =>{
                             <AiOutlineSearch fill="white"/>
                         </div>
                     </div>
+                    {/* switch (isJobDetailsLoaded) {
+                        case(jobDetailsLodingStatus.loading):
+                            <ThreeDots type="TailSpin" color="white" height={100} width={50} />
+                            break;
+                        case(jobDetailsLodingStatus.loading:
+                            <ul>
+                                {jobslist.map((eachJob)=><JobDetailsItem jobDetails={eachJob} />)}
+                            </ul>
+                            break;
+                        default:
+                            <h1>Test</h1>
+                            break;
+                    } */}
+
+                     {/* if(isJobDetailsLoaded === jobDetailsLodingStatus.loading){ }
+                    //     <ThreeDots type="TailSpin" color="white" height={100} width={50} />
+                    // }
+                    // else if(isJobDetailsLoaded === jobDetailsLodingStatus.success){
+                    //     <ul>
+                    //     {jobslist.map((eachJob)=><JobDetailsItem jobDetails={eachJob} />)}
+                    //     </ul>
+                    // }
+                    // else{
+                    //     <h1>failure</h1>
+                // }*/}
                     <ul>
-                        {jobslist.map((eachJob)=><JobDetailsItem jobDetails={eachJob} />)}
+                    {jobslist.map((eachJob)=><JobItem jobDetails={eachJob} key={eachJob.id}/>)}
                     </ul>
+                    
                 </div>
             </div>
         </>

@@ -4,7 +4,7 @@ import {BsBriefcaseFill} from "react-icons/bs";
 import {AiFillStar} from "react-icons/ai";
 
 
-const JobDetailsItem = props =>{
+const JobItem = props =>{
     //  console.log(props)
     const {jobDetails} = props;
     const {companyLogoUrl, employmentType, jobDescription, location, packagePerAnnum, rating, title} = jobDetails;
@@ -34,4 +34,4 @@ const JobDetailsItem = props =>{
 
 }
 
-export default JobDetailsItem
+export default JobItem
