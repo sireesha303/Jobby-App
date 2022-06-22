@@ -35,7 +35,8 @@
     background-color: #545955;
     border:1px solid white;
     border-radius: 1px;
-    padding: auto;
+    padding: 5px;
+    outline: none;
 }
 
 .logo-img{
@@ -54,9 +55,12 @@
 
 .input-label{
     color: white;
-    font-size: 10px;
+    font-size: 12px;
     font-family: 'Times New Roman', Times, serif;
     color: white;
+    font-weight: bold;
+    margin-bottom: 3px;
+    
 }
 .username-password-container{
     display: flex;

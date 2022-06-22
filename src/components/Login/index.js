@@ -54,7 +54,7 @@ const Login = () =>{
         return(
             <div className='input-container'>
             <label htmlFor="username" className="input-label">USERNAME</label>
-            <input type="text" id="username" className='input-el' onChange={onChangeOfUsername} value={username}/>
+            <input type="text" id="username" className='input-el' onChange={onChangeOfUsername} value={username} placeholder="Username"/>
             </div>
         )
        
@@ -64,7 +64,7 @@ const Login = () =>{
         return(
             <div className='input-container'>
             <label htmlFor="password" className="input-label">PASSWORD</label>
-            <input type="password" id="passwprd" className='input-el' onChange={onChangeOfPassword} value={password}/>
+            <input type="password" id="passwprd" className='input-el' onChange={onChangeOfPassword} value={password} placeholder="Password"/>
             </div>
         )
     }
