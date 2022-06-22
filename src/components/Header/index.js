@@ -2,6 +2,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie';
 
+import {MdOutlineLogout} from 'react-icons/md';
+import {AiFillHome} from 'react-icons/ai';
+import {BsBriefcaseFill} from 'react-icons/bs';
+
 const Header = () => {
 
     const navigate = useNavigate();
@@ -19,11 +23,17 @@ const Header = () => {
                 className='header-logo-img'
                 />
             </Link>
-            <div>
+            <div className='home-jobs-lg-nav-items-container'>
                 <Link to="/" className='nav-link'>Home</Link>
                 <Link to="/jobs" className='nav-link'>Jobs</Link>
             </div>
             <button className='logout-btn' onClick={logoutFromApp}>Logout</button>
+            <div className='home-jobs-sm-nav-icons-container'>
+                <Link to="/"><AiFillHome fill='white' className='sm-nav-icon'/></Link>
+                <Link to="/jobs"><BsBriefcaseFill fill='white' className='sm-nav-icon'/></Link>
+                <MdOutlineLogout fill='white' className='sm-nav-icon' onClick={logoutFromApp}/>
+            </div>
+            
             
         </div>
     )

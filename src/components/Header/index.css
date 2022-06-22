@@ -8,6 +8,12 @@
     margin:0px;
 }
 
+@media screen and (min-width:768px) {
+    .header-container{
+    justify-content: space-between;
+    }
+}
+
 .header-logo-img{
     height:40px;
     width:100px;
@@ -33,4 +39,32 @@
     border-radius: 2px;
     border:1px solid white;
 
+}
+
+@media screen and (max-width:767px) {
+    .logout-btn{
+        display: none;
+    }
+}
+
+.home-jobs-sm-nav-icons-container{
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (min-width:768px) {
+    .home-jobs-sm-nav-icons-container{
+        display:none;
+    }
+}
+
+
+@media screen and (max-width:767px) {
+    .home-jobs-lg-nav-items-container{
+        display: none;
+    }
+}
+
+.sm-nav-icon{
+    margin: 5px;
 }
