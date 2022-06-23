@@ -6,8 +6,6 @@
     justify-content: space-between;
     align-items: center;
     margin:0px;
-    /* position: fixed; */
-    position: sticky;
 }
 
 @media screen and (min-width:768px) {
