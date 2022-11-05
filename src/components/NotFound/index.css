@@ -1,0 +1,27 @@
+.not-found-contianer{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.not-found-info-container{
+    height:100%;
+    background-color: rgb(191, 206, 201);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-info{
+    font-size: 18px;
+    text-align: center;
+}
+
+.go-home-btn{
+    padding: 10px;
+    border-radius: 9px;
+    border-color: black;
+    font-size: 18px;
+    cursor: pointer;
+}
