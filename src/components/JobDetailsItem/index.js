@@ -145,7 +145,7 @@ const JobDetailsItem = props =>{
     }
 
     const getSimilarJobDetails = eachJob =>{
-        const {companyLogoUrl,employmentType,id,jobDescription,rating,title,location} = eachJob
+        const {companyLogoUrl,employmentType,jobDescription,rating,title,location} = eachJob
         // console.log(eachJob)
         return(
             <div className="job-container">

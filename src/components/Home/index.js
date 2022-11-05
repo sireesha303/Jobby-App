@@ -1,4 +1,3 @@
-import { Redirect } from 'react-router-dom';
 import Header from '../Header';
 
 import './index.css';
