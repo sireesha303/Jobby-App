@@ -1,4 +1,4 @@
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie';
 
@@ -6,15 +6,16 @@ import {MdOutlineLogout} from 'react-icons/md';
 import {AiFillHome} from 'react-icons/ai';
 import {BsBriefcaseFill} from 'react-icons/bs';
 
-const Header = () => {
+const Header = (props) => {
 
-    // const navigate = useNavigate();
-
+    const {history} = props
+  
     const logoutFromApp = () =>{
-        Cookies.remove('jobby_app_jwt_token');
-        return <Redirect to="/login"/>;
-        // navigate("/login");
+        Cookies.remove('jobby_app_jwt_token')
+        history.replace('/login');
+        // return <Redirect to="/login"/>;
     }
+
     return(
         <div className='header-container'>
             <Link to="/">
@@ -40,4 +41,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default withRouter(Header)
