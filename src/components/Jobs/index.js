@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 import {AiOutlineSearch} from 'react-icons/ai'
-
 import {ThreeDots} from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
-
+import {Redirect} from 'react-router-dom';
 
 import "./index.css"
 import Header from '../Header'
@@ -104,6 +103,21 @@ const Jobs = () =>{
         
     }
 
+    const getListOfJobs = () =>{
+        switch (isJobDetailsLoaded) {
+            case jobDetailsLodingStatus.loading:
+                return <ThreeDots type="TailSpin" color="white" height={100} width={50} />
+            case jobDetailsLodingStatus.success:
+                return <ul>
+                    {jobslist.map((eachJob)=><JobItem jobDetails={eachJob} key={eachJob.id}/>)}
+                </ul>
+            case jobDetailsLodingStatus.failure:
+                return <Redirect to="/login"/>
+            default:
+                return null
+        }
+    }
+
     return(
         <>
             <Header />
@@ -132,34 +146,7 @@ const Jobs = () =>{
                             <AiOutlineSearch fill="white"/>
                         </div>
                     </div>
-                    {/* switch (isJobDetailsLoaded) {
-                        case(jobDetailsLodingStatus.loading):
-                            <ThreeDots type="TailSpin" color="white" height={100} width={50} />
-                            break;
-                        case(jobDetailsLodingStatus.loading:
-                            <ul>
-                                {jobslist.map((eachJob)=><JobDetailsItem jobDetails={eachJob} />)}
-                            </ul>
-                            break;
-                        default:
-                            <h1>Test</h1>
-                            break;
-                    } */}
-
-                     {/* if(isJobDetailsLoaded === jobDetailsLodingStatus.loading){ }
-                    //     <ThreeDots type="TailSpin" color="white" height={100} width={50} />
-                    // }
-                    // else if(isJobDetailsLoaded === jobDetailsLodingStatus.success){
-                    //     <ul>
-                    //     {jobslist.map((eachJob)=><JobDetailsItem jobDetails={eachJob} />)}
-                    //     </ul>
-                    // }
-                    // else{
-                    //     <h1>failure</h1>
-                // }*/}
-                    <ul>
-                    {jobslist.map((eachJob)=><JobItem jobDetails={eachJob} key={eachJob.id}/>)}
-                    </ul>
+                    {getListOfJobs()}
                     
                 </div>
             </div>
@@ -169,5 +156,7 @@ const Jobs = () =>{
     )
     
 }
+
+
 
 export default Jobs
