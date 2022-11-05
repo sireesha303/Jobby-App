@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import "./index.css";
+import {ThreeDots} from 'react-loader-spinner'
+
 
 import {AiFillStar} from "react-icons/ai";
 import {MdLocationOn} from "react-icons/md";
@@ -9,11 +11,18 @@ import {BsFillArrowUpRightSquareFill} from 'react-icons/bs'
 
 import Header from "../Header";
 
+const isJobDetailsFetched = {
+    success:'SUCCESS',
+    failure:'FAILURE',
+    loading:'LOADING'
+}
+
 const JobDetailsItem = props =>{
     const {match} = props;
     const {params} = match;
     const {id} = params;
 
+    const [jobDetailsFetchedStatus, setJobDetailsFetchedStatus] = useState(isJobDetailsFetched.loading)
     const [jobDetails,setJobDetails] = useState({companyLogoUrl:"",
     companyWebsiteUrl:"",
     employmentType:"",
@@ -49,6 +58,7 @@ const JobDetailsItem = props =>{
             const data = await response.json()
 
             if(response.ok){
+                setJobDetailsFetchedStatus(isJobDetailsFetched.success)
                 const updatedData = {
                     companyLogoUrl:data.job_details.company_logo_url,
                     companyWebsiteUrl:data.job_details.company_website_url,
@@ -82,9 +92,14 @@ const JobDetailsItem = props =>{
 
                 setJobDetails({...updatedData});
             }
+            else{
+                setJobDetailsFetchedStatus(isJobDetailsFetched.failure)
+
+            }
         }
+
         fetchData();
-        // console.log(jobDetails);
+       
 
     },[]);
 
@@ -154,8 +169,9 @@ const JobDetailsItem = props =>{
 
     }
 
-    return(
-        <div className="job-detail-item-bg-container">
+    const getJobDetailsFetchedSuccessView = () =>{
+        return(
+            <div className="job-detail-item-bg-container">
             <Header />
             <div className="selected-job-and-similar-jobs-container">
                 <div id="selected-job-container" className="selected-job-container">
@@ -194,7 +210,32 @@ const JobDetailsItem = props =>{
             </div>
             
         </div>
+        )
+    }
+
+    const getJobDetails = () =>{
+        switch(jobDetailsFetchedStatus){
+            case isJobDetailsFetched.loading:
+                console.log('loading')
+                return <div className="loader-container">
+                    <ThreeDots type="TailSpin" color="black" height={150} width={100} className=""/>
+                </div>
+                
+            case isJobDetailsFetched.success:
+                console.log('success')
+                return getJobDetailsFetchedSuccessView()
+            default:
+                return null
+    }
+    }
+
+    return(
+        <>
+        {getJobDetails()}
+        </>
+        
     )
 }
+
 
 export default JobDetailsItem
