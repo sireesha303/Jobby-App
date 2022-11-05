@@ -82,7 +82,7 @@ const Jobs = () =>{
    
     const onChangeofEmploymentType = (event) =>{
         // console.log(event.target.value)
-        if(employmentType != ''){
+        if(employmentType !== ''){
             let t = employmentType.concat(',',event.target.value)
             setEmploymentType(t)
             
