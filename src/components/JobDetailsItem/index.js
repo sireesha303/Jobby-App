@@ -216,7 +216,6 @@ const JobDetailsItem = props =>{
     const getJobDetails = () =>{
         switch(jobDetailsFetchedStatus){
             case isJobDetailsFetched.loading:
-                console.log('loading')
                 return <div className="loader-container">
                     <ThreeDots type="TailSpin" color="black" height={150} width={100} className=""/>
                 </div>

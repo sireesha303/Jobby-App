@@ -1,4 +1,4 @@
-import { Link, Redirect, withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie';
 

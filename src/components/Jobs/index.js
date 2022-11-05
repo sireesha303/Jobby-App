@@ -19,11 +19,16 @@ const Jobs = () =>{
     const [jobslist, setJobsList] = useState([]);
     const [userInfo,setUserInfo] = useState({profileImgUrl:"",name:"",shortBio:"",isProfileDetailsLoaded:false});
     const [isJobDetailsLoaded,setJobDetailsLoadStatus] = useState(jobDetailsLodingStatus.loading)
+    const [employmentType,setEmploymentType] = useState('')
+    const [minimumPackage,setMinimumPackage] = useState('')
+    const [titleSearchInput, setTitleSearchInput] = useState('')
 
     useEffect(()=>{
         async function fetchData(){
+            setJobDetailsLoadStatus(jobDetailsLodingStatus.loading)
+            
             const jwtToken = Cookies.get('jobby_app_jwt_token');
-            const url = "https://apis.ccbp.in/jobs"
+            const url = `https://apis.ccbp.in/jobs?employment_type=${employmentType}&minimum_package=${minimumPackage}&search=${titleSearchInput}`
             const options = {
                 method:'GET',
                 headers: {
@@ -72,32 +77,56 @@ const Jobs = () =>{
             })
         }
         fetchData();
-    },[]);
+    },[employmentType,minimumPackage,titleSearchInput]);
+
+   
+    const onChangeofEmploymentType = (event) =>{
+        // console.log(event.target.value)
+        if(employmentType != ''){
+            let t = employmentType.concat(',',event.target.value)
+            setEmploymentType(t)
+            
+        }
+        else{
+            setEmploymentType(event.target.value)
+            // console.log(employmentType)
+        }
+    }
+
+    const onChangeOfMinimumSalary = (event) =>{
+        setMinimumPackage(event.target.value)
+    }
+
+    const onChangeOfSearchInput = (event) =>{
+        console.log(event.target.value)
+        setTitleSearchInput(event.target.value)
+
+    }
 
     const getDifferentFilters = () =>{
         return(
             <>
             <hr className="line-break"/>
             <h1 className="filter-heading">Type Of Employement</h1>
-            <input type="checkbox" id="fulltime" name="fav_language" value="Full Time"/>
-            <label htmlFor="fulltime" className="filter-label">Full Time</label><br/>
-            <input type="checkbox" id="parttime" name="fav_language" value="Part Time"/>
-            <label htmlFor="parttime" className="filter-label">Part Time</label><br/>
-            <input type="checkbox" id="freelance" name="fav_language" value="Freelance"/>
-            <label htmlFor="FreeLance" className="filter-label">Freelance</label><br/>
-            <input type="checkbox" id="internship" name="fav_language" value="Internship"/>
-            <label htmlFor="internship" className="filter-label">Internship</label><br/>
+            <input type="checkbox" id="FULLTIME" name="fav_language" value="FULLTIME" onChange={onChangeofEmploymentType}/>
+            <label htmlFor="FULLTIME" className="filter-label">Full Time</label><br/>
+            <input type="checkbox" id="PARTTIME" name="fav_language" value="PARTTIME" onChange={onChangeofEmploymentType}/>
+            <label htmlFor="PARTTIME" className="filter-label">Part Time</label><br/>
+            <input type="checkbox" id="FREELANCE" name="fav_language" value="FREELANCE" onChange={onChangeofEmploymentType}/>
+            <label htmlFor="FREELANCE" className="filter-label">Freelance</label><br/>
+            <input type="checkbox" id="INTERNSHIP" name="fav_language" value="INTERNSHIP" onChange={onChangeofEmploymentType}/>
+            <label htmlFor="INTERNSHIP" className="filter-label">Internship</label><br/>
             <hr className="line-break"/>
 
             <h1 className="filter-heading">Salary Range</h1>
-            <input type="radio" id="10lpa" name="fav_language" value="10LPA"/>
-            <label htmlFor="10lpa" className="filter-label">10LPA and above</label><br/>
-            <input type="radio" id="20lpa" name="fav_language" value="20LPA"/>
-            <label htmlFor="20lpa" className="filter-label">20LPA and above</label><br/>
-            <input type="radio" id="10lpa" name="fav_language" value="30LPA"/>
-            <label htmlFor="30lpa" className="filter-label">30LPA and above</label><br/>
-            <input type="radio" id="10lpa" name="fav_language" value="40LPA"/>
-            <label htmlFor="40lpa" className="filter-label">40LPA and above</label><br/>
+            <input type="radio" id="1000000" name="fav_language" value="1000000" onChange={onChangeOfMinimumSalary}/>
+            <label htmlFor="1000000" className="filter-label">10LPA and above</label><br/>
+            <input type="radio" id="2000000" name="fav_language" value="2000000" onChange={onChangeOfMinimumSalary}/>
+            <label htmlFor="2000000" className="filter-label">20LPA and above</label><br/>
+            <input type="radio" id="3000000" name="fav_language" value="3000000" onChange={onChangeOfMinimumSalary}/>
+            <label htmlFor="3000000" className="filter-label">30LPA and above</label><br/>
+            <input type="radio" id="4000000" name="fav_language" value="4000000" onChange={onChangeOfMinimumSalary}/>
+            <label htmlFor="4000000" className="filter-label">40LPA and above</label><br/>
         </>
         )
         
@@ -141,7 +170,7 @@ const Jobs = () =>{
                 </div>
                 <div>
                     <div className="search-container">
-                        <input type="search" className="search-el" placeholder="Search" />
+                        <input type="search" className="search-el" placeholder="Search" onChange={onChangeOfSearchInput}/>
                         <div className="search-icon-container">
                             <AiOutlineSearch fill="white"/>
                         </div>

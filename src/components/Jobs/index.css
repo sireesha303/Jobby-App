@@ -96,7 +96,7 @@
     border:0px;
     width:90%;
     margin:5px;
-
+    color: white;
 }
 
 @media screen and (max-width:768px) {
@@ -132,6 +132,4 @@
     font-size: 15px;
 }
 
-.testing{
-    color: white;
-}
+
