@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie';
 
@@ -8,11 +8,12 @@ import {BsBriefcaseFill} from 'react-icons/bs';
 
 const Header = () => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const logoutFromApp = () =>{
         Cookies.remove('jobby_app_jwt_token');
-        navigate("/login");
+        return <Redirect to="/login"/>;
+        // navigate("/login");
     }
     return(
         <div className='header-container'>

@@ -1,34 +1,36 @@
 import {useState} from 'react'
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
-
+import {Redirect} from 'react-router-dom';
 import './index.css'
 
-const Login = () =>{
-    const [username,setUsername] = useState()
-    const [password,setPassword] = useState()
+const Login = (props) =>{
+    const [username,setUsername] = useState("")
+    const [password,setPassword] = useState("")
     const [loginError,setLoginError] = useState({showLoginError:false,loginErrorMsg:""});
 
-    const navigate = useNavigate();
 
     const onLoginSuccess = (jwtToken) =>{
-        Cookies.set('jobby_app_jwt_token',jwtToken,{expires:2})
-        navigate("/");
+        const {history} = props
+        Cookies.set('jobby_app_jwt_token',jwtToken,{expires:2, path: "/",});
+        history.replace("/");
     }
 
     const onLoginFailure = (errorMsg) =>{
+        console.log("in login failed func")
+
         setLoginError({showLoginError:true,loginErrorMsg:errorMsg})
     }
 
     const onFormSubmit = async event => {
         event.preventDefault();
-        // console.log("testing form submit")
         const url = "https://apis.ccbp.in/login"
-        const options ={method: 'POST',
-        body: JSON.stringify({ username:username,password:password})
+
+        const options ={
+            method: 'POST',
+            body: JSON.stringify({ username:username,password:password}),
         };
 
-        const response = await fetch(url,options)
+        const response = await fetch(url,options);
         const data = await response.json();
 
         if(response.ok === true){
@@ -40,12 +42,10 @@ const Login = () =>{
     }
 
     const onChangeOfUsername = event => {
-        // console.log(event.target.value)
         setUsername(event.target.value)
     }
 
     const onChangeOfPassword = event =>{
-        // console.log(event.target.value)
         setPassword(event.target.value)
     }
 
@@ -69,6 +69,11 @@ const Login = () =>{
         )
     }
 
+    const isLoggedIn =  Cookies.get("jobby_app_jwt_token");
+
+    if(isLoggedIn !== undefined){
+        return <Redirect to="/" />;
+    }
     return(
         <div className="app-container">
             <form className="form-container" onSubmit={onFormSubmit}>

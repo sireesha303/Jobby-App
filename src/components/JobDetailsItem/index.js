@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import Cookies from 'js-cookie';
 import "./index.css";
 
@@ -11,6 +10,10 @@ import {BsFillArrowUpRightSquareFill} from 'react-icons/bs'
 import Header from "../Header";
 
 const JobDetailsItem = props =>{
+    const {match} = props;
+    const {params} = match;
+    const {id} = params;
+
     const [jobDetails,setJobDetails] = useState({companyLogoUrl:"",
     companyWebsiteUrl:"",
     employmentType:"",
@@ -25,7 +28,11 @@ const JobDetailsItem = props =>{
     similarJobs:[],
     })
 
-    const {id} = useParams();
+    // const {id} = useParams();
+
+    // const {match} = this.props;
+    // const {params} = match;
+    // const {id} = params;
 
     useEffect(() =>{
 
@@ -124,7 +131,7 @@ const JobDetailsItem = props =>{
 
     const getSimilarJobDetails = eachJob =>{
         const {companyLogoUrl,employmentType,id,jobDescription,rating,title,location} = eachJob
-        console.log(eachJob)
+        // console.log(eachJob)
         return(
             <div className="job-container">
                 <div className="title-img-container">

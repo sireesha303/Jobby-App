@@ -20,7 +20,6 @@ authorized HTTP Api calls
 * Sending HTTP Request to get backend data as response using Fetch API Js.
 * Adding React Icons for Attractive UI.
 * Based on User Selected Filter updating the query parameters of API and fetching data from backend with updated inputs.
-
 ## Technologies Used
 * React Js
 * CSS

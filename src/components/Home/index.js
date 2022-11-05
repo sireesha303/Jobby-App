@@ -1,14 +1,15 @@
-import { useNavigate } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import Header from '../Header'
 
 import './index.css'
 
 const Home = () =>{
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const onClickOfFindJobs =() =>{
-        navigate("/jobs")
+        <Redirect to="/jobs"/>
+        // navigate("/jobs")
     }
     
     return(
