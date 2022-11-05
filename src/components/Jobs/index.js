@@ -98,7 +98,7 @@ const Jobs = () =>{
     }
 
     const onChangeOfSearchInput = (event) =>{
-        console.log(event.target.value)
+        // console.log(event.target.value)
         setTitleSearchInput(event.target.value)
 
     }
