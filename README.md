@@ -42,7 +42,7 @@ authorized HTTP Api calls.
 
 
 ## Checkout URL
-* [Jobby App](https://sireesha-jobby-app.herokuapp.com/)
+* [Jobby App](sireesha-jobby-app.vercel.app/)
 
 ## Credentials
 UserName : rahul
